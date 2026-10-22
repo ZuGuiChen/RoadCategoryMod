@@ -2,6 +2,7 @@
 [h2]Splits the vanilla road panel (Small / Medium / Large / Highway) into 10 useful categories[/h2]
 
 Version v1.0.0 (first public release) · 9 languages · requires CitiesHarmony
+Source code and changelog: [url=https://github.com/ZuGuiChen/RoadCategoryMod]https://github.com/ZuGuiChen/RoadCategoryMod[/url]
 
 [h3]Features[/h3]
 [list]

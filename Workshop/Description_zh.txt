@@ -2,6 +2,7 @@
 [h2]把原版只有 4 类（小 / 中 / 大 / 高速）的道路面板，细分成 10 个实用分类[/h2]
 
 版本：v1.0.0（首个公开版本） · 支持 9 种语言 · 需要 CitiesHarmony
+源码与更新日志：[url=https://github.com/ZuGuiChen/RoadCategoryMod]https://github.com/ZuGuiChen/RoadCategoryMod[/url]
 
 [h3]主要功能[/h3]
 [list]

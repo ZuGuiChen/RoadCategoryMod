@@ -90,23 +90,30 @@ RoadCategoryMod\
    - 启用 UnifiedUI 时，UUI 面板里其它模组图标仍在（回归点）
 6. 关掉其它替换道路面板的模组（如 Better Road Toolbar）再测一次
 
-## 上传到 GitHub
+## 源码仓库（已发布）
 
-仓库根目录已准备好 `.gitignore`、`.gitattributes`、`README.md`、`LICENSE`、`build.ps1`，
-可以直接作为公开仓库。构建方式见根目录 `README.md` 的「从源码构建」一节，上传步骤：
+* 仓库：<https://github.com/ZuGuiChen/RoadCategoryMod>（公开）
+* 首个版本：<https://github.com/ZuGuiChen/RoadCategoryMod/releases/tag/v1.0.0>（附 `RoadCategoryMod-v1.0.0.zip`）
+* 账号：`ZuGuiChen`，使用 `gh`（GitHub CLI）创建与推送，已登录
+
+### 以后提交更新
+
+本机没有把 Git 加到 PATH，可以直接用 Visual Studio 自带的 git：
 
 ```powershell
-# 1) 安装 Git for Windows（本机当前没有安装）：https://git-scm.com/download/win
-# 2) 在仓库根目录初始化并提交
-git init
-git add .
-git commit -m "Initial public release v1.0.0"
-git branch -M main
-
-# 3) 在 GitHub 网页上新建空仓库（不要勾选 README/License），然后：
-git remote add origin https://github.com/<你的用户名>/RoadCategoryMod.git
-git push -u origin main
+$git = "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\Git\cmd\git.exe"
+& $git add -A
+& $git commit -m "v1.0.1: 修复 xxx"
+& $git push
 ```
 
-> 注意：`bin/`、`obj/`、`.vs/` 已在 `.gitignore` 中排除；
+（装一个 Git for Windows 后就可以直接用 `git` 命令。）
+
+打新版本 Release（会自动创建 tag 并上传发布包）：
+
+```powershell
+& "C:\Program Files\GitHub CLI\gh.exe" release create v1.0.1 "Release\RoadCategoryMod-v1.0.1.zip" --title "v1.0.1" --notes "更新说明"
+```
+
+> 注意：`bin/`、`obj/`、`.vs/`、`packages/`、`Release/` 已在 `.gitignore` 中排除；
 > 游戏 DLL（`Assembly-CSharp.dll` 等）不在仓库里，编译时需要本机安装游戏与 CitiesHarmony。

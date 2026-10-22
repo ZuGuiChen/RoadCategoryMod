@@ -1,0 +1,161 @@
+[h1]精细道路分类 / Fine Road Categories[/h1]
+[h2]把原版只有 4 类（小 / 中 / 大 / 高速）的道路面板，细分成 10 个实用分类[/h2]
+
+版本：v1.0.0（首个公开版本） · 支持 9 种语言 · 需要 CitiesHarmony
+
+[h3]主要功能[/h3]
+[list]
+[*][b]10 类细分[/b]：乡村公路、社区小路、小型道路、中型道路、主干道、大型道路、高速公路、巴士专用道、步行道路、其他道路
+[*][b]自动分类引擎[/b]：按机动车道数、中心线、中央分隔带、公交专用道、道路名称等特征自动判断；创意工坊道路资产也适用
+[*][b]道路分类管理器[/b]：列出全部道路（缩略图 / 名称 / 车道数），可逐条手动指定分类，支持搜索、分类筛选、单条重置、全部重置
+[*][b]手动分类持久化[/b]：保存在 xml 里，重启游戏后道路面板按你的设置显示
+[*][b]自定义图标[/b]：10 个分类图标 + 浮动按钮图标都可换成自己的 PNG（模组自带一套默认图标，开箱即用）
+[*][b]圆形浮动按钮[/b]：可拖动、大小 28–64 像素、位置自动保存，也可以完全关闭
+[*][b]UnifiedUI 集成（可选）[/b]：勾选后把入口放进 UnifiedUI 工具栏
+[*][b]9 种语言[/b]：简体中文 / English / Deutsch / Español / Français / 한국어 / Polski / Português / Русский，可跟随游戏语言
+[*][b]热键[/b]：Ctrl+Shift+Y 打开道路总览窗口（可改为打开分类管理器）
+[*][b]性能[/b]：管理器使用行控件池 + 可见区虚拟化，道路资产再多也保持恒定开销
+[/list]
+
+[h3]必须的前置[/h3]
+[list]
+[*][b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=2040656402]CitiesHarmony（Harmony 2.2+）[/url][/b] —— 本模组用 Harmony 替换道路面板分类，缺少它会无法工作
+[/list]
+
+[h3]可选前置[/h3]
+[list]
+[*][b]UnifiedUI[/b] —— 只有当你勾选「将图标加入 UnifiedUI」时才需要；未安装时该选项会提示不可用，不影响模组加载
+[/list]
+
+[h3]不兼容 / 需二选一[/h3]
+[list]
+[*][b]Better Road Toolbar[/b] 以及其它[b]同样替换“道路面板父级分类”[/b]的模组。功能重叠，同时启用会互相覆盖，请只保留一个。
+[/list]
+
+[h3]已验证可共存[/h3]
+Find It 2、Move It、Traffic Manager: President Edition、Intersection Marking Tool、Network Anarchy / Road Anarchy、Node Controller Renewal、Quay Tools、Loading Screen Mod Revisited、FPS Booster、Skyve、Lumina、Network Multitool、Picker、Prop Control 等。
+这些模组不接管道路面板的父级分类，因此不会冲突。
+
+[h3]安装[/h3]
+[list]
+[*]订阅本模组与 CitiesHarmony（以及可选的 UnifiedUI）
+[*]启动游戏 →「内容管理器 → 模组」确认三者都已启用
+[/list]
+
+[h3]使用方法[/h3]
+[list]
+[*]进入城市后，点击屏幕左下角的圆形浮动按钮打开「道路分类管理器」
+[*]搜索 / 筛选找到道路 → 下拉框指定分类（★ 表示手动分类）→「保存配置」→ 重启游戏后道路面板按新分类显示
+[*]所有设置都在「选项 → 模组设置 → 精细道路分类」里：界面语言、浮动按钮、管理器搜索模式、UnifiedUI、热键、图标、手动分类数据
+[/list]
+
+[h3]自定义图标[/h3]
+图标目录：%LOCALAPPDATA%\Colossal Order\Cities_Skylines\RoadCategoryMod\Icons\
+可用文件名：category_10 / 20 / 30 / 40 / 50 / 60 / 70 / 80 / 85 / 90.png、float_button.png、category_tag.png
+建议 64×64 PNG、透明背景；修改后需要重启游戏。
+
+[h3]FAQ[/h3]
+[list]
+[*][b]改了分类为什么道路面板没变？[/b] 管理器里的手动分类需要「保存配置」并重启游戏；道路左下角分类图标弹窗里的修改会立即刷新。
+[*][b]换了图标为什么不显示？[/b] 图标在启动时加载，重启游戏即可。
+[*][b]和 Find It 2 冲突吗？[/b] 不冲突（Find It 2 不替换道路面板父级分类）。
+[*][b]会破坏存档吗？[/b] 不会。本模组只影响 UI 分类，不修改道路本身与存档数据；移除模组也不会损坏城市。
+[*][b]为什么主菜单看不到浮动按钮？[/b] 浮动按钮只在城市内创建，进入城市后出现。
+[/list]
+
+[h3]配置文件[/h3]
+[list]
+[*]设置：%USERPROFILE%\AppData\LocalLow\Colossal Order\Cities_ Skylines\RoadCategoryModSettings.xml
+[*]手动分类：%LOCALAPPDATA%\Colossal Order\Cities_Skylines\RoadCategoryMod\custom_categories.xml
+[/list]
+
+[h3]更新日志[/h3]
+详见源码仓库的 CHANGELOG.md；v1.0.0 为首个公开版本，整合了发布前全部内部迭代的功能与修复。
+
+[h3]致谢[/h3]
+豆包 AI（初始框架与功能开发）、DeepSeek AI（多语言 / 设置页 / 性能 / UnifiedUI / 图标与发布整理），以及 Cities: Skylines 模组社区（Find It 2、Better Road Toolbar 等提供的实现思路）。
+
+[h3]反馈[/h3]
+遇到问题请在创意工坊留言，并附上 `Cities_Data\output_log.txt` 中与 RoadCategoryMod 相关的行，便于快速定位。
+
+[hr][/hr]
+
+[h1]Fine Road Categories[/h1]
+[h2]Splits the vanilla road panel (Small / Medium / Large / Highway) into 10 useful categories[/h2]
+
+Version v1.0.0 (first public release) · 9 languages · requires CitiesHarmony
+
+[h3]Features[/h3]
+[list]
+[*][b]10 fine categories[/b]: rural, community, small, medium, arterial, large, highways, bus roads, pedestrian roads, other roads
+[*][b]Automatic classifier[/b]: uses vehicle lane count, centre line, median, bus lanes and road names; works with Workshop road assets
+[*][b]Road Category Manager[/b]: lists every road asset (thumbnail / name / lane count) with search, category filter, per-road reset and reset-all
+[*][b]Manual overrides are saved[/b] to an XML file; the road panel uses them after a restart
+[*][b]Custom icons[/b]: replace all 10 category icons and the floating button icon with your own PNGs (a default icon set is bundled)
+[*][b]Circular floating button[/b]: draggable, 28–64 px, position saved automatically, can be disabled entirely
+[*][b]Optional UnifiedUI integration[/b]: put the entry on the UnifiedUI toolbar
+[*][b]9 languages[/b]: Simplified Chinese, English, Deutsch, Español, Français, 한국어, Polski, Português, Русский — can follow the game language
+[*][b]Hotkey[/b]: Ctrl+Shift+Y opens the road overview window (configurable to open the manager instead)
+[*][b]Performance[/b]: pooled row list with visible-area rendering — constant cost regardless of how many road assets you have
+[/list]
+
+[h3]Required dependency[/h3]
+[list]
+[*][b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=2040656402]CitiesHarmony (Harmony 2.2+)[/url][/b] — this mod uses Harmony to replace the road panel categories; it will not work without it
+[/list]
+
+[h3]Optional dependency[/h3]
+[list]
+[*][b]UnifiedUI[/b] — only needed if you enable "Add icon to UnifiedUI"; without it the option simply reports unavailable and the mod still loads fine
+[/list]
+
+[h3]Incompatible / choose one[/h3]
+[list]
+[*][b]Better Road Toolbar[/b] and any other mod that also [b]replaces the road panel's parent categories[/b]. They overlap with this mod; enable only one of them.
+[/list]
+
+[h3]Verified to work alongside[/h3]
+Find It 2, Move It, Traffic Manager: President Edition, Intersection Marking Tool, Network Anarchy / Road Anarchy, Node Controller Renewal, Quay Tools, Loading Screen Mod Revisited, FPS Booster, Skyve, Lumina, Network Multitool, Picker, Prop Control and more.
+Those mods do not replace the road panel's parent categories, so they do not conflict.
+
+[h3]Installation[/h3]
+[list]
+[*]Subscribe to this mod and to CitiesHarmony (plus UnifiedUI if you want the integration)
+[*]Start the game → Content Manager → Mods, make sure all of them are enabled
+[/list]
+
+[h3]How to use[/h3]
+[list]
+[*]In game, click the circular floating button (bottom-left by default) to open the Road Category Manager
+[*]Search or filter, pick a category from the dropdown (★ = manual), then click "Save" — the road panel re-sorts categories after a game restart
+[*]Everything else lives in Options → Mod settings → Fine Road Categories: language, floating button, manager search mode, UnifiedUI, hotkey, icons, manual override data
+[/list]
+
+[h3]Custom icons[/h3]
+Folder: %LOCALAPPDATA%\Colossal Order\Cities_Skylines\RoadCategoryMod\Icons\
+Names: category_10 / 20 / 30 / 40 / 50 / 60 / 70 / 80 / 85 / 90.png, float_button.png, category_tag.png
+64×64 PNG with transparency is recommended. Restart the game to apply.
+
+[h3]FAQ[/h3]
+[list]
+[*][b]I changed a category but the road panel did not change.[/b] Manual overrides from the manager require "Save" and a game restart; changes made from the small category badge on a road button refresh the panel immediately.
+[*][b]My custom icons are not showing.[/b] Icons are loaded at startup — restart the game.
+[*][b]Does it conflict with Find It 2?[/b] No. Find It 2 does not replace the road panel's parent categories.
+[*][b]Can it break my save?[/b] No. It only affects UI categories and never modifies roads or save data; removing the mod is safe.
+[*][b]Why is there no floating button in the main menu?[/b] It is only created inside a city.
+[/list]
+
+[h3]Config files[/h3]
+[list]
+[*]Settings: %USERPROFILE%\AppData\LocalLow\Colossal Order\Cities_ Skylines\RoadCategoryModSettings.xml
+[*]Manual categories: %LOCALAPPDATA%\Colossal Order\Cities_Skylines\RoadCategoryMod\custom_categories.xml
+[/list]
+
+[h3]Changelog[/h3]
+See CHANGELOG.md in the source repository. v1.0.0 is the first public release and consolidates all pre-release iterations.
+
+[h3]Credits[/h3]
+Doubao AI (initial framework and features), DeepSeek AI (localization, settings page, performance, UnifiedUI, icons and release preparation), and the Cities: Skylines modding community (implementation ideas from Find It 2, Better Road Toolbar, etc.).
+
+[h3]Feedback[/h3]
+Please post issues with the RoadCategoryMod lines from `Cities_Data\output_log.txt`.

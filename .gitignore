@@ -1,0 +1,23 @@
+# Visual Studio / MSBuild æ„å»ºäº§ç‰©
+.vs/
+bin/
+obj/
+*.user
+*.suo
+*.userprefs
+*.cache
+
+# æœ¬é¡¹ç›®ä¸ä½¿ç”¨ NuGet åŒ…ï¼ˆå†å²é—ç•™ç›®å½•ï¼Œå¦‚å‡ºç°è¯·å¿½ç•¥ï¼‰
+packages/
+
+# æ—¥å¿—ä¸ä¸´æ—¶æ–‡ä»¶
+*.log
+*.tmp
+
+# æ“ä½œç³»ç»Ÿ
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# ±¾µØ·¢²¼µÄ zip£¨½¨Òé×÷Îª GitHub Release ¸½¼ş£¬¶ø²»ÊÇÌá½»½ø²Ö¿â£©
+Release/

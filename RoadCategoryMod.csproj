@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{03B8E7B0-CEB6-44D2-B1D0-85D3FD63617E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>RoadCategoryMod</RootNamespace>
+    <AssemblyName>RoadCategoryMod</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <!--
+    游戏与 Harmony 路径：
+    默认值适用于本机，换机器/其它人编译时可用命令行覆盖，例如
+      msbuild RoadCategoryMod.csproj /p:Configuration=Release /p:GameDir="C:\...\Cities_Skylines"
+    也可以用环境变量 CITIES_SKYLINES_DIR / CITIES_HARMONY_DIR。
+  -->
+  <PropertyGroup>
+    <GameDir Condition="'$(GameDir)' == '' and '$(CITIES_SKYLINES_DIR)' != ''">$(CITIES_SKYLINES_DIR)</GameDir>
+    <GameDir Condition="'$(GameDir)' == ''">D:\Program Files (x86)\Steam\steamapps\common\Cities_Skylines</GameDir>
+    <ManagedDir>$(GameDir)\Cities_Data\Managed</ManagedDir>
+    <HarmonyDir Condition="'$(HarmonyDir)' == '' and '$(CITIES_HARMONY_DIR)' != ''">$(CITIES_HARMONY_DIR)</HarmonyDir>
+    <HarmonyDir Condition="'$(HarmonyDir)' == ''">D:\Program Files (x86)\Steam\steamapps\workshop\content\255710\2040656402</HarmonyDir>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Assembly-CSharp">
+      <HintPath>$(ManagedDir)\Assembly-CSharp.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="CitiesHarmony.Harmony">
+      <HintPath>$(HarmonyDir)\CitiesHarmony.Harmony.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="ColossalManaged">
+      <HintPath>$(ManagedDir)\ColossalManaged.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="ICities">
+      <HintPath>$(ManagedDir)\ICities.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UnityEngine">
+      <HintPath>$(ManagedDir)\UnityEngine.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CollectAssetsPatch.cs" />
+    <Compile Include="AssemblyVersionPicker.cs" />
+    <Compile Include="CategoryMarker.cs" />
+    <Compile Include="CreateButtonPatch.cs" />
+    <Compile Include="CategorySelectPopup.cs" />
+    <Compile Include="HotkeyListener.cs" />
+    <Compile Include="IndependentWindow.cs" />
+    <Compile Include="IsCategoryValidPatch.cs" />
+    <Compile Include="Localization.cs" />
+    <Compile Include="ModSettings.cs" />
+    <Compile Include="ModSettingsUI.cs" />
+    <Compile Include="Patcher.cs" />
+    <Compile Include="PopulateGroupsPatch.cs" />
+    <Compile Include="RoadCategoryMod.cs" />
+    <Compile Include="RoadCategoryConfig.cs" />
+    <Compile Include="RoadClassifier.cs" />
+    <Compile Include="RoadGroupTabs.cs" />
+    <Compile Include="RoadCategoryManagerUI.cs" />
+    <Compile Include="SearchFilterState.cs" />
+    <Compile Include="CustomIconLoader.cs" />
+    <Compile Include="IconConfig.cs" />
+    <Compile Include="UiIcons.cs" />
+    <Compile Include="UnifiedUIIntegration.cs" />
+    <Compile Include="UIFilterPatches.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- 把默认图标一起复制到输出目录，发布时 Icons 文件夹与 DLL 同级 -->
+  <Target Name="CopyDefaultIcons" AfterTargets="Build">
+    <ItemGroup>
+      <DefaultIconFiles Include="Icons\*.png" />
+    </ItemGroup>
+    <Copy SourceFiles="@(DefaultIconFiles)" DestinationFolder="$(OutputPath)Icons" SkipUnchangedFiles="true"
+          Condition="'@(DefaultIconFiles)' != ''" />
+    <Message Text="已复制 @(DefaultIconFiles->Count()) 个默认图标到 $(OutputPath)Icons" Condition="'@(DefaultIconFiles)' != ''" Importance="high" />
+  </Target>
+</Project>

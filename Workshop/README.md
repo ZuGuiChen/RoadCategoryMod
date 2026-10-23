@@ -72,8 +72,17 @@ RoadCategoryMod\
 * **标签**：Mod；描述开头已写明「需要 CitiesHarmony」
 * **可见性**：确认设为「公开」
 
-> ⚠️ **游戏内的「模组商店说明」有字数上限**，超了会提示「保存标题和描述时出错」。
-> 发布时只填一句短说明（见 `PublishFields_zh.txt`），完整 BBCode 描述在**网页端**粘贴。
+> ⚠️ **Steam 描述上限：8000 字节（UTF-8，含 BBCode 与换行）**
+> 英文字符 ≈ 1 字节，中文 ≈ 3 字节（约 2600 个汉字）；超了就会提示「保存标题和描述时出错」。
+> 发布前用 `Workshop\check_description_size.ps1` 复查：
+>
+> ```
+> Description_bilingual.txt   3883 bytes  48.5%  OK
+> Description_en.txt          5052 bytes  63.1%  OK
+> Description_zh.txt          5162 bytes  64.5%  OK
+> ```
+>
+> 游戏内那个输入框只填一句短说明（见 `PublishFields_zh.txt`），完整描述在网页端粘贴。
 
 ## 发布前检查清单
 

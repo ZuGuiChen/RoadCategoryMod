@@ -98,6 +98,10 @@
     <Compile Include="UIFilterPatches.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <!-- 把默认图标嵌入 DLL：创意工坊订阅后不依赖任何外部文件夹，图标一定能加载 -->
+  <ItemGroup>
+    <EmbeddedResource Include="Icons\*.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- 把默认图标一起复制到输出目录，发布时 Icons 文件夹与 DLL 同级 -->
   <Target Name="CopyDefaultIcons" AfterTargets="Build">

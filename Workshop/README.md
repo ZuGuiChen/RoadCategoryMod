@@ -19,17 +19,17 @@
 
 ```
 RoadCategoryMod\
-├── RoadCategoryMod.dll    必需（v1.0.0）
+├── RoadCategoryMod.dll    必需（v1.0.1）
 ├── RoadCategoryMod.pdb    可选（调试用）
-├── Thumbnail.png          模组缩略图
-└── Icons\                 必需（默认图标，首次运行会复制到用户目录）
-    ├── category_10.png … category_90.png
-    ├── float_button.png
-    └── category_tag.png
+└── Thumbnail.png          模组缩略图（可选）
 ```
 
-构建产物（`bin\Release`）已经包含 `Icons\`；把 `Workshop\Thumbnail.png` 复制进去即可作为发布包。
-本仓库根目录的 `Release\RoadCategoryMod-v1.0.0.zip` 就是按此结构打好的包。
+> v1.0.1 起，12 个默认图标已**嵌入 DLL**（`<EmbeddedResource>`），
+> 不再依赖 `Icons\` 文件夹——订阅后无论模组装在哪个目录都能加载图标。
+> `Icons\` 仍可由玩家自行放置以覆盖默认图标（会写到
+> `%LOCALAPPDATA%\Colossal Order\Cities_Skylines\RoadCategoryMod\Icons\`）。
+
+本仓库的 `Release\RoadCategoryMod-v1.0.1.zip` 就是按此结构打好的包。
 
 ## 上传到创意工坊
 
@@ -60,30 +60,30 @@ RoadCategoryMod\
 ### 方式 B：Steamworks 上传工具
 
 1. **先关游戏**（DLL 被占用时无法覆盖/上传）
-2. 确认 `bin\Release`（或 `Release\RoadCategoryMod-v1.0.0.zip` 解压后）内容完整，版本号为 **1.0.0.0**
+2. 确认 `bin\Release`（或 `Release\RoadCategoryMod-v1.0.1.zip` 解压后）内容完整，版本号为 **1.0.1.0**
 3. 用 Steamworks 上传工具（AppID `255710`）把 `RoadCategoryMod\` 文件夹作为物品内容上传
 
 ### 发布后填写工坊页面
 
 * **标题**：精细道路分类 / Fine Road Categories（游戏内发布会用模组名作标题，可在页面改）
-* **描述**：粘贴 `Description_zh.txt`（英文页面用 `Description_en.txt`）
+* **描述**：粘贴 `Description_zh.txt`（英文页面用 `Description_en.txt`，或中英合并的 `Description_bilingual.txt`）
 * **封面**：若页面显示的是蓝图占位图，改成 `preview_16x9.png` 或 `preview.png`
 * **截图**：`screenshots/` 目录里的图片（建议再补 2–3 张游戏内截图）
 * **标签**：Mod；描述开头已写明「需要 CitiesHarmony」
 * **可见性**：确认设为「公开」
-   * **封面**：`preview.png`
-   * **截图**：`screenshots/` 目录里的图片（建议再补 2–3 张游戏内截图）
-   * **标签**：Mod；描述开头已写明「需要 CitiesHarmony」
-5. 发布后在自己的存档里跑一遍第 6 步的检查清单。
+
+> ⚠️ **游戏内的「模组商店说明」有字数上限**，超了会提示「保存标题和描述时出错」。
+> 发布时只填一句短说明（见 `PublishFields_zh.txt`），完整 BBCode 描述在**网页端**粘贴。
 
 ## 发布前检查清单
 
-1. `Properties\AssemblyInfo.cs` 版本号 = **1.0.0.0**
-2. `CHANGELOG.md` 顶部有 v1.0.0 公开版本条目
-3. Release 构建 0 错误 0 警告，`bin\Release\Icons\` 有 12 个 PNG
+1. `Properties\AssemblyInfo.cs` 版本号 = **1.0.1.0**
+2. `CHANGELOG.md` 顶部有对应版本条目
+3. Release 构建 0 错误 0 警告；确认 DLL 内嵌了 12 个图标
+   （PowerShell：`[Reflection.Assembly]::LoadFile("...\RoadCategoryMod.dll").GetManifestResourceNames()`）
 4. 关闭游戏后部署到 `%LOCALAPPDATA%\Colossal Order\Cities_Skylines\Addons\Mods\RoadCategoryMod\`
 5. 启动游戏 → 进城市 → 检查：
-   - 道路面板出现 10 个分类页、图标正常
+   - 道路面板出现 10 个分类页、图标正常（**v1.0.1 回归点：删掉 Icons 文件夹也应正常**）
    - 圆形浮动按钮可拖动、大小可调
    - 管理器打开无卡顿，搜索/筛选/重置正常，日志里 `行控件 13 个`
    - 设置页各分组正常，切语言后 tab tooltip 跟着变

@@ -35,6 +35,9 @@ namespace RoadCategoryMod
         /// </summary>
         public void OnEnabled()
         {
+            LogInstallationInfo();
+            LogDuplicateInstallations();
+
             try
             {
                 Patcher.PatchAll();
@@ -55,6 +58,71 @@ namespace RoadCategoryMod
             catch (Exception)
             {
                 // 忽略
+            }
+        }
+
+        /// <summary>记录当前生效的版本与安装路径，便于排查问题。</summary>
+        private static void LogInstallationInfo()
+        {
+            try
+            {
+                var asm = typeof(RoadCategoryMod).Assembly;
+                Debug.Log("[RoadCategoryMod] 版本 " + asm.GetName().Version + " 已启用，路径: " + SafeLocation(asm));
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        /// <summary>
+        /// 检测同一模组是否被加载了多份（例如本地 Addons 里一份 + 工坊订阅一份）。
+        /// 两份会各自打补丁、各自创建按钮，还可能出现“旧版覆盖新版”导致图标丢失。
+        /// </summary>
+        private static void LogDuplicateInstallations()
+        {
+            try
+            {
+                var mine = typeof(RoadCategoryMod).Assembly;
+                var name = mine.GetName().Name;
+                var others = new System.Collections.Generic.List<string>();
+
+                foreach (var asm in AppDomain.CurrentDomain.GetAssemblies())
+                {
+                    try
+                    {
+                        if (asm == mine) continue;
+                        if (asm.GetName().Name != name) continue;
+                        others.Add(asm.GetName().Version + " @ " + SafeLocation(asm));
+                    }
+                    catch (Exception)
+                    {
+                    }
+                }
+
+                if (others.Count == 0)
+                    return;
+
+                Debug.LogWarning("[RoadCategoryMod] 检测到重复安装（同一模组共加载 " + (others.Count + 1) + " 份）：\n" +
+                                 "  当前: " + mine.GetName().Version + " @ " + SafeLocation(mine) + "\n" +
+                                 "  其它: " + string.Join("\n        ", others.ToArray()) + "\n" +
+                                 "  请只保留一份（本地 Addons\\Mods\\RoadCategoryMod 或创意工坊订阅之一），" +
+                                 "否则会出现图标缺失、浮动按钮重复等问题。");
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private static string SafeLocation(System.Reflection.Assembly asm)
+        {
+            try
+            {
+                string loc = asm.Location;
+                return string.IsNullOrEmpty(loc) ? "(路径不可用)" : loc;
+            }
+            catch (Exception)
+            {
+                return "(路径不可用)";
             }
         }
 
